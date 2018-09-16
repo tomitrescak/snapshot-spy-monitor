@@ -1,0 +1,34 @@
+{
+  "name": "luis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.4.11",
+    "@types/react-dom": "^16.0.7",
+    "apollo-boost": "^0.1.14",
+    "apollo-server-express": "1",
+    "body-parser": "^1.18.3",
+    "diff-view": "^1.0.12",
+    "express": "^4.16.3",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^3.1.1",
+    "json-socket": "^0.3.0",
+    "mobx": "^5.1.1",
+    "mobx-react": "^5.2.8",
+    "parcel-bundler": "^1.9.7",
+    "react": "^16.4.2",
+    "react-apollo": "^2.1.11",
+    "react-dom": "^16.4.2",
+    "typestyle": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.0.1"
+  }
+}
