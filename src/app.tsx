@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Highlight from 'react-highlight';
 
 import { observer } from 'mobx-react';
 
@@ -118,8 +119,27 @@ class Item extends React.Component<Props> {
                   <th style={{ width: '50%', background: '#dedede' }}>Expected</th>
                 </tr>
                 <tr>
-                  <td style={{ width: '50%' }} dangerouslySetInnerHTML={{ __html: v.content }} />
-                  <td style={{ width: '50%' }} dangerouslySetInnerHTML={{ __html: v.expected }} />
+                  {v.content.trim()[0] === '{' ? (
+                    <>
+                      <td style={{ width: '50%' }}>
+                        <Highlight language="json">{v.content}</Highlight>
+                      </td>
+                      <td style={{ width: '50%' }}>
+                        <Highlight language="json">{v.expected}</Highlight>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td
+                        style={{ width: '50%' }}
+                        dangerouslySetInnerHTML={{ __html: v.content }}
+                      />
+                      <td
+                        style={{ width: '50%' }}
+                        dangerouslySetInnerHTML={{ __html: v.expected }}
+                      />
+                    </>
+                  )}
                 </tr>
               </tbody>
             </table>
@@ -133,8 +153,22 @@ class Item extends React.Component<Props> {
               }}
             />
           )}
-          {state.view === 'current' && <div dangerouslySetInnerHTML={{ __html: v.content }} />}
-          {state.view === 'snapshot' && <div dangerouslySetInnerHTML={{ __html: v.expected }} />}
+          {state.view === 'current' &&
+            (v.content.trim()[0] === '{' ? (
+              <div style={{ width: '100%' }}>
+                <Highlight language="json">{v.content}</Highlight>
+              </div>
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: v.content }} />
+            ))}
+          {state.view === 'snapshot' &&
+            (v.content.trim()[0] === '{' ? (
+              <div style={{ width: '100%' }}>
+                <Highlight language="json">{v.expected}</Highlight>
+              </div>
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: v.expected }} />
+            ))}
         </div>
       );
     }

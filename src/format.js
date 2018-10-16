@@ -9,34 +9,36 @@ function formatOne(text, publicPath) {
   if (!text) {
     return text;
   }
-  const a = 1;
 
   text = text.trim();
 
-  if (text[0] === '{' || text[0] === '[') {
-    text = `<pre>${text}</pre>`;
-    return text;
-  }
-  if (text.startsWith('Object {')) {
+  if (text[0] === '{' || text[0] === '[' || text.startsWith('Object {')) {
     try {
       // create object and remove trailing comma
-      text = text.replace('Object {', '{');
-      text = text.replace(/,\n.*\}/, '}');
-      text = `<pre>${JSON.stringify(JSON.parse(text), null, 2)}</pre>`;
+      text = text.replace(/Object \{/g, '{');
+      text = text.replace(/Array \[/g, '[');
+    } catch (ex) {
+      console.log(ex);
     } finally {
       return text;
     }
   }
 
-  return text;
+  return null;
 }
 
 function formatSnapshot(ss) {
   let snapshots = '';
   let key = '';
+  debugger;
 
   if (typeof ss == 'string') {
-    snapshots = formatOne(ss, '');
+    let one = formatOne(ss, '');
+    if (one) {
+      return one;
+    } else {
+      text = ss;
+    }
   } else {
     for (let key of Object.getOwnPropertyNames(ss)) {
       // remove snapshots that are not in this test
